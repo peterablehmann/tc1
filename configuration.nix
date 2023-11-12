@@ -1,8 +1,8 @@
 { modulesPath, lib, inputs, ... }: {
   imports = [
 
-    #inputs.disko.nixosModules.disko
-    #./disko.nix
+    inputs.disko.nixosModules.disko
+    ./disko.nix
     ./hardware-configuration.nix
     ./modules
   ];
@@ -13,7 +13,6 @@
   };
 
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -24,7 +23,6 @@
   i18n.defaultLocale = "de_DE.UTF-8";
 
   boot.tmp.cleanOnBoot = true;
-  zramSwap.enable = true;
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
   networking = {
